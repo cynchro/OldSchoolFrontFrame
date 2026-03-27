@@ -43,6 +43,13 @@ example/modules/{name}/
   {name}.css   (optional; use css: true in module)
 ```
 
+Imports use the thin alias `framework/module.js` → `defineModule`.
+
+## CLI
+
+- `node cli/ols.js create module <name>` — scaffold under `example/modules/`
+- `node cli/ols.js create starter [folder]` — optional standalone template (default folder name `project/`). It copies `framework/` into `<folder>/framework/` so the starter is self-contained; framework work in this repo stays under root `framework/` + `example/`. See README → **CLI** → **Create a starter**.
+
 ## Pull request checklist
 
 - [ ] The change is scoped to one concern.

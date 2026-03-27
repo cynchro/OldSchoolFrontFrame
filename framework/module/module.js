@@ -2,6 +2,11 @@ function isPlainObject(value) {
   return value != null && typeof value === "object" && !Array.isArray(value);
 }
 
+/**
+ * Declares a route module (HTML + reactive state + methods).
+ * Optional **services**: plain JS under `modules/<name>/services/` — import them explicitly;
+ * see `SERVICES.md` in this folder. Services must not touch the DOM.
+ */
 export function defineModule(moduleDefinition = {}) {
   if (!isPlainObject(moduleDefinition)) {
     throw new Error("defineModule(definition): definition must be an object.");
