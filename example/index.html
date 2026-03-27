@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Micro Framework Example</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root {
+        font-family: Arial, sans-serif;
+        line-height: 1.4;
+      }
+      body {
+        margin: 24px;
+        color: #1f2937;
+        background: #f9fafb;
+      }
+      nav {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      a {
+        color: #2563eb;
+        text-decoration: none;
+      }
+      .card {
+        border: 1px solid #d1d5db;
+        background: white;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 12px;
+      }
+      pre {
+        background: #111827;
+        color: #d1fae5;
+        padding: 12px;
+        border-radius: 8px;
+        overflow: auto;
+      }
+      input, select, button {
+        margin-top: 8px;
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Minimal Frontend Micro-Framework</h1>
+
+    <nav>
+      <a href="#/home">Home</a>
+      <a href="#/about">About</a>
+      <a href="#/external">External</a>
+      <a href="#/clientes">Clientes</a>
+    </nav>
+
+    <div class="card">
+      <h3>Loaded Config</h3>
+      <pre id="config">{}</pre>
+    </div>
+
+    <main id="app" class="card"></main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

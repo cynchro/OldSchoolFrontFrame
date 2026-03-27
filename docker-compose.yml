@@ -1,0 +1,6 @@
+services:
+  ols-school-front-frame:
+    build: .
+    container_name: ols-school-front-frame
+    ports:
+      - "9000:9000"

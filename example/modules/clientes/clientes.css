@@ -1,0 +1,22 @@
+h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+input {
+  margin-right: 8px;
+  padding: 6px 8px;
+}
+
+button {
+  padding: 6px 10px;
+}
+
+ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 4px;
+}

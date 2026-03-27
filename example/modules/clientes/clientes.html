@@ -1,0 +1,15 @@
+<section>
+  <h2 data-bind="title"></h2>
+  <p>Total clientes: <strong data-bind="count"></strong></p>
+
+  <input
+    type="text"
+    data-bind="newClientName"
+    data-model
+    data-model-event="input"
+    placeholder="Nuevo cliente"
+  />
+  <button data-click="addClient">Agregar</button>
+
+  <ul id="clientes-list"></ul>
+</section>
