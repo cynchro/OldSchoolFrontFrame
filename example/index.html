@@ -12,9 +12,12 @@
       .sidebar-link { font-size: 0.9rem; }
       .sidebar-link.active-link { background-color: rgba(255,255,255,0.12); color: #fff !important; border-radius: 4px; }
       .site-footer { height: 40px; }
+      body { padding-bottom: 40px; }
       @media (max-width: 991.98px) {
         .app-shell { display: block !important; }
         #app { padding: 1rem !important; }
+        .site-footer { position: static !important; height: auto; padding: 10px 16px; }
+        body { padding-bottom: 0; }
       }
     </style>
   </head>
@@ -146,10 +149,10 @@
         });
       })();
     </script>
-    <footer class="site-footer fixed-bottom bg-dark border-top border-secondary-subtle d-flex align-items-center justify-content-center gap-2">
-      <small class="text-secondary">OldSchoolFrontFrame</small>
+    <footer class="site-footer fixed-bottom bg-dark border-top border-secondary d-flex align-items-center justify-content-center gap-2">
+      <small class="text-white fw-semibold">OldSchoolFrontFrame</small>
       <small class="text-secondary">·</small>
-      <a href="https://github.com/cynchro/OldSchoolFrontFrame" target="_blank" rel="noopener" class="text-secondary small">
+      <a href="https://github.com/cynchro/OldSchoolFrontFrame" target="_blank" rel="noopener" class="text-white small">
         github.com/cynchro/OldSchoolFrontFrame
       </a>
     </footer>
