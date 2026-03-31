@@ -16,6 +16,8 @@ const TEXTS = {
     linkStore:       "— estado global compartido entre módulos",
     linkServicios:   "— fetch, loading states, manejo de errores",
     linkComponentes: "— piezas reutilizables con Component()",
+    patternsLabel: "Patrones",
+    linkAuth: "— login, token en memoria, fetch autenticado",
     philosophy: [
       { text: "Sin paso de compilación" },
       { text: "Módulos por carpeta" },
@@ -43,6 +45,8 @@ const TEXTS = {
     linkStore:       "— global state shared across modules",
     linkServicios:   "— fetch, loading states, error handling",
     linkComponentes: "— reusable pieces with Component()",
+    patternsLabel: "Patterns",
+    linkAuth: "— login, in-memory token, authenticated fetch",
     philosophy: [
       { text: "No build step" },
       { text: "Folder-based modules" },

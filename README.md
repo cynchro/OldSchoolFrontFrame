@@ -470,3 +470,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 ## Code of Conduct
 
 See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+## Buy me a coffe?
+https://www.paypal.com/donate/?hosted_button_id=YX332RT7KSJ4Q

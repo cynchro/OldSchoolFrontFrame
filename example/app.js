@@ -12,7 +12,8 @@ async function bootstrap() {
       "perfil/:id": "perfil",
       store:        "store",
       servicios:    "servicios",
-      componentes:  "componentes"
+      componentes:  "componentes",
+      auth:         "auth"
     },
     config: "./config.yaml",
     store: {

@@ -1,0 +1,59 @@
+<div>
+  <h4 class="mb-1" data-bind="t.title"></h4>
+  <p class="text-muted mb-1" data-bind="t.description"></p>
+  <p class="text-muted small mb-4" data-bind="t.demoNote"></p>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+
+      <!-- LOGIN FORM -->
+      <div id="auth-login-panel">
+        <div class="card shadow-sm mb-3">
+          <div class="card-header fw-semibold" data-bind="t.loginTitle"></div>
+          <div class="card-body">
+            <div class="mb-2">
+              <label class="form-label small" data-bind="t.labelUser"></label>
+              <input class="form-control form-control-sm" type="text"
+                data-bind="username" data-model data-model-event="input" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label small" data-bind="t.labelPass"></label>
+              <input class="form-control form-control-sm" type="password"
+                data-bind="password" data-model data-model-event="input" />
+            </div>
+            <button class="btn btn-primary btn-sm w-100" data-click="login" data-bind="t.btnLogin"></button>
+            <p class="text-danger small mt-2 mb-0" data-bind="error"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUTHENTICATED PANEL -->
+      <div id="auth-user-panel" style="display:none">
+        <div class="card shadow-sm border-success mb-3">
+          <div class="card-header fw-semibold text-success" data-bind="t.authTitle"></div>
+          <div class="card-body">
+            <p class="small mb-1" data-bind="t.loggedAs"></p>
+            <h6 data-bind="loggedUser"></h6>
+            <p class="small text-muted mb-1" data-bind="t.expiresAt"></p>
+            <p class="small mb-3"><code data-bind="expiry"></code></p>
+
+            <button class="btn btn-sm btn-outline-primary me-2" data-click="fetchProtected" data-bind="t.btnFetch"></button>
+            <button class="btn btn-sm btn-outline-danger" data-click="logout" data-bind="t.btnLogout"></button>
+
+            <div class="mt-3">
+              <p class="small text-muted mb-1" data-bind="t.responseLabel"></p>
+              <pre class="bg-dark text-light p-2 rounded mb-0" style="font-size:.75rem;min-height:2.5rem" data-bind="apiResponse"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.code"></div>
+        <pre class="bg-dark text-light p-3 rounded-bottom mb-0" style="font-size:.8rem" data-bind="snippet"></pre>
+      </div>
+    </div>
+  </div>
+</div>
