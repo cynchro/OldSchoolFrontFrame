@@ -29,6 +29,55 @@ function updateNodeValue(node, value) {
   node.textContent = value ?? "";
 }
 
+// WHY: replace <template data-for="..."> with a comment anchor so the browser
+// never renders the template, and we control exactly where items are inserted.
+function setupForNodes(root) {
+  const forNodes = new Map();
+
+  root.querySelectorAll("template[data-for]").forEach((templateEl) => {
+    const path = templateEl.dataset.for;
+    const anchor = document.createComment(` data-for="${path}" `);
+    templateEl.replaceWith(anchor);
+    forNodes.set(path, { template: templateEl, anchor });
+  });
+
+  return forNodes;
+}
+
+function renderForPath(path, forNodes, state) {
+  const def = forNodes.get(path);
+  if (!def) return;
+
+  const { template, anchor } = def;
+  const items = readPath(state, path);
+
+  // Remove previously rendered items (tagged with _forOwner reference to their anchor).
+  let node = anchor.nextSibling;
+  while (node && node._forOwner === anchor) {
+    const next = node.nextSibling;
+    node.remove();
+    node = next;
+  }
+
+  if (!Array.isArray(items)) return;
+
+  const frag = document.createDocumentFragment();
+  items.forEach((item, index) => {
+    const clone = template.content.cloneNode(true);
+    clone.querySelectorAll("[data-bind]").forEach((el) => {
+      updateNodeValue(el, item[el.dataset.bind] ?? "");
+    });
+    // Tag each top-level child so we can find and remove them on next render.
+    Array.from(clone.children).forEach((child) => {
+      child._forOwner = anchor;
+      child.dataset.index = String(index);
+    });
+    frag.appendChild(clone);
+  });
+
+  anchor.after(frag);
+}
+
 export function bindData(root, state, options = {}) {
   const selectors = options.selector || "[data-bind]";
   const nodes = root.matches(selectors)
@@ -44,6 +93,8 @@ export function bindData(root, state, options = {}) {
     }
     nodeGroupsByPath.get(path).push(node);
   });
+
+  const forNodes = setupForNodes(root);
 
   const renderPath = (path) => {
     const pathNodes = nodeGroupsByPath.get(path) || [];
@@ -63,10 +114,16 @@ export function bindData(root, state, options = {}) {
         renderPath(boundPath);
       }
     });
+    forNodes.forEach((_def, forPath) => {
+      if (isRelatedPath(changedPath, forPath)) {
+        renderForPath(forPath, forNodes, state);
+      }
+    });
   };
 
   const render = () => {
     nodeGroupsByPath.forEach((_pathNodes, path) => renderPath(path));
+    forNodes.forEach((_def, path) => renderForPath(path, forNodes, state));
   };
 
   const attachTwoWay = () => {

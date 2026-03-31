@@ -1,0 +1,51 @@
+<div>
+  <h4 class="mb-1" data-bind="t.title"></h4>
+  <p class="text-muted mb-4" data-bind="t.description"></p>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.demo"></div>
+        <div class="card-body">
+
+          <div class="mb-3">
+            <label class="form-label small fw-semibold">data-click</label>
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn btn-primary btn-sm" data-click="onClick" data-bind="t.btnClick"></button>
+              <span class="text-muted small" data-bind="clickMsg"></span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small fw-semibold">data-change</label>
+            <select class="form-select form-select-sm" data-change="onChange">
+              <template data-for="selectOptions">
+                <option data-bind="value"></option>
+              </template>
+            </select>
+            <span class="text-muted small"><span data-bind="t.selected"></span>: <strong data-bind="selected"></strong></span>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small fw-semibold">data-keyup</label>
+            <input class="form-control form-control-sm" type="text" data-keyup="onKeyup" />
+            <span class="text-muted small"><span data-bind="t.lastKey"></span>: <strong data-bind="lastKey"></strong></span>
+          </div>
+
+          <div class="mb-0">
+            <label class="form-label small fw-semibold">data-input</label>
+            <input class="form-control form-control-sm" type="text" data-input="onInput" />
+            <span class="text-muted small"><span data-bind="t.chars"></span>: <strong data-bind="charCount"></strong></span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.code"></div>
+        <pre class="bg-dark text-light p-3 rounded-bottom mb-0" style="font-size:.8rem" data-bind="snippet"></pre>
+      </div>
+    </div>
+  </div>
+</div>

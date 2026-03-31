@@ -1,0 +1,41 @@
+<div>
+  <h4 class="mb-1" data-bind="t.title"></h4>
+  <p class="text-muted mb-4" data-bind="t.description"></p>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.demo"></div>
+        <div class="card-body">
+
+          <p class="small mb-1 text-muted" data-bind="t.currentRoute"></p>
+          <code class="d-block mb-3" data-bind="currentRoute"></code>
+
+          <hr />
+
+          <label class="form-label small fw-semibold" data-bind="t.navLabel"></label>
+          <div class="input-group mb-3">
+            <span class="input-group-text">#/perfil/</span>
+            <input class="form-control" type="text"
+              data-bind="profileId" data-model data-model-event="input"
+              placeholder="42" />
+            <button class="btn btn-primary" data-click="goToProfile" data-bind="t.btnGo"></button>
+          </div>
+
+          <div class="d-flex gap-2">
+            <a href="#/perfil/1"  class="btn btn-sm btn-outline-secondary">Perfil 1</a>
+            <a href="#/perfil/42" class="btn btn-sm btn-outline-secondary">Perfil 42</a>
+            <a href="#/perfil/99" class="btn btn-sm btn-outline-secondary">Perfil 99</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.code"></div>
+        <pre class="bg-dark text-light p-3 rounded-bottom mb-0" style="font-size:.8rem" data-bind="snippet"></pre>
+      </div>
+    </div>
+  </div>
+</div>

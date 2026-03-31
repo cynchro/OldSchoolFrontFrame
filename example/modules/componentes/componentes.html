@@ -1,0 +1,26 @@
+<div>
+  <h4 class="mb-1" data-bind="t.title"></h4>
+  <p class="text-muted mb-4" data-bind="t.description"></p>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.demoTitle"></div>
+        <div class="card-body">
+          <p class="text-muted small mb-3" data-bind="t.demoHint"></p>
+          <div class="d-flex gap-2">
+            <button class="btn btn-success btn-sm" data-click="showSuccess" data-bind="t.btnSuccess"></button>
+            <button class="btn btn-danger btn-sm" data-click="showError" data-bind="t.btnError"></button>
+            <button class="btn btn-info btn-sm text-white" data-click="showInfo" data-bind="t.btnInfo"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.code"></div>
+        <pre class="bg-dark text-light p-3 rounded-bottom mb-0" style="font-size:.8rem" data-bind="snippet"></pre>
+      </div>
+    </div>
+  </div>
+</div>

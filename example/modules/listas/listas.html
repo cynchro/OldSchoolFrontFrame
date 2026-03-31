@@ -1,0 +1,44 @@
+<div>
+  <h4 class="mb-1" data-bind="t.title"></h4>
+  <p class="text-muted mb-4" data-bind="t.description"></p>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center fw-semibold">
+          <span data-bind="t.demo"></span>
+          <span class="badge bg-primary rounded-pill" data-bind="count">0</span>
+        </div>
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <input class="form-control form-control-sm" type="text"
+              data-bind="newItem" data-model data-model-event="input"
+              placeholder="" />
+            <button class="btn btn-primary btn-sm" data-click="addItem" data-bind="t.btnAdd"></button>
+          </div>
+          <button class="btn btn-sm btn-outline-secondary mb-3" data-click="loadFromApi" data-bind="t.btnLoad"></button>
+          <p class="text-muted small mb-2" data-bind="status"></p>
+          <ul class="list-group list-group-flush">
+            <template data-for="items">
+              <li class="list-group-item d-flex justify-content-between py-1">
+                <span data-bind="title"></span>
+                <span class="badge bg-light text-dark border" data-bind="id"></span>
+              </li>
+            </template>
+          </ul>
+        </div>
+        <div class="card-footer d-flex align-items-center gap-2">
+          <button class="btn btn-sm btn-outline-secondary" data-click="prevPage" data-bind="t.btnPrev"></button>
+          <span class="small text-muted"><span data-bind="t.page"></span> <span data-bind="page"></span></span>
+          <button class="btn btn-sm btn-outline-secondary" data-click="nextPage" data-bind="t.btnNext"></button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.code"></div>
+        <pre class="bg-dark text-light p-3 rounded-bottom mb-0" style="font-size:.8rem" data-bind="snippet"></pre>
+      </div>
+    </div>
+  </div>
+</div>

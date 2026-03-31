@@ -1,0 +1,19 @@
+<div>
+  <h4 class="mb-1" data-bind="t.title"></h4>
+  <p class="text-muted mb-4" data-bind="t.description"></p>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <p class="text-muted small mb-1" data-bind="t.paramLabel"></p>
+      <h2 class="display-5 fw-bold mb-1" data-bind="id"></h2>
+      <p class="text-muted small mb-0"><span data-bind="t.fullRoute"></span>: <code data-bind="route"></code></p>
+    </div>
+  </div>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-header fw-semibold" data-bind="t.howTitle"></div>
+    <pre class="bg-dark text-light p-3 rounded-bottom mb-0" style="font-size:.8rem" data-bind="snippet"></pre>
+  </div>
+
+  <a href="#/rutas" class="btn btn-outline-secondary btn-sm" data-bind="t.btnBack"></a>
+</div>

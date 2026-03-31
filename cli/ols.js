@@ -45,6 +45,8 @@ function createModule(moduleName) {
 </div>
 `;
   const jsTemplate = `import { defineModule } from "../../../framework/module.js";
+// Para lógica de API, creá: services/${moduleName}.service.js
+// import { getData } from "./services/${moduleName}.service.js";
 
 export default defineModule({
   css: true,
@@ -139,6 +141,8 @@ environment: local
 `;
 
   const homeJs = `import { defineModule } from "../../framework/module.js";
+// Para lógica de API, creá: services/home.service.js
+// import { getData } from "./services/home.service.js";
 
 export default defineModule({
   css: true,

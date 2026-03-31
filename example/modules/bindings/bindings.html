@@ -1,0 +1,36 @@
+<div>
+  <h4 class="mb-1" data-bind="t.title"></h4>
+  <p class="text-muted mb-4" data-bind="t.description"></p>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.demo"></div>
+        <div class="card-body">
+
+          <p class="fw-semibold mb-1">data-model <span class="badge bg-secondary fw-normal">two-way</span></p>
+          <input class="form-control mb-2" type="text"
+            data-bind="message" data-model data-model-event="input"
+            placeholder="" />
+          <p class="text-muted small"><span data-bind="t.currentValue"></span>: <strong data-bind="message"></strong></p>
+
+          <hr />
+
+          <p class="fw-semibold mb-1">data-bind <span class="badge bg-secondary fw-normal">one-way</span></p>
+          <div class="d-flex gap-2 mb-2">
+            <button class="btn btn-primary btn-sm" data-click="increment" data-bind="t.btnIncrement"></button>
+            <button class="btn btn-outline-secondary btn-sm" data-click="reset" data-bind="t.btnReset"></button>
+          </div>
+          <p class="text-muted small"><span data-bind="t.counter"></span>: <strong data-bind="count"></strong></p>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.code"></div>
+        <pre class="bg-dark text-light p-3 rounded-bottom mb-0" style="font-size:.8rem" data-bind="snippet"></pre>
+      </div>
+    </div>
+  </div>
+</div>

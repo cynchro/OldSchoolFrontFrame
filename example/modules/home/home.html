@@ -1,7 +1,51 @@
-<section>
-  <h2>Home</h2>
-  <p class="home-note" data-bind="message"></p>
-  <input type="text" data-bind="message" data-model data-model-event="input" />
-  <button data-click="increment">Increment</button>
-  <p>Local count: <span data-bind="count"></span></p>
-</section>
+<div>
+  <h3 class="mb-1" data-bind="t.title"></h3>
+  <p class="lead text-muted mb-4" data-bind="t.subtitle"></p>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <h6 class="card-title" data-bind="t.card1Title"></h6>
+          <ul class="mb-0 small">
+            <template data-for="t.philosophy">
+              <li data-bind="text"></li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <h6 class="card-title" data-bind="t.card2Title"></h6>
+          <ul class="mb-0 small">
+            <template data-for="t.audience">
+              <li data-bind="text"></li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <h6 class="card-title" data-bind="t.card3Title"></h6>
+          <code class="small">python3 -m http.server 8080</code>
+          <p class="small mb-0 mt-2" data-bind="t.card3Body"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h6 class="text-uppercase text-muted mb-3" style="font-size:.75rem" data-bind="t.sectionsLabel"></h6>
+  <div class="list-group shadow-sm">
+    <a href="#/bindings"    class="list-group-item list-group-item-action"><strong>Bindings</strong> <span class="text-muted" data-bind="t.linkBindings"></span></a>
+    <a href="#/listas"      class="list-group-item list-group-item-action"><strong>Listas / Lists</strong> <span class="text-muted" data-bind="t.linkListas"></span></a>
+    <a href="#/eventos"     class="list-group-item list-group-item-action"><strong>Eventos / Events</strong> <span class="text-muted" data-bind="t.linkEventos"></span></a>
+    <a href="#/rutas"       class="list-group-item list-group-item-action"><strong>Rutas / Routes</strong> <span class="text-muted" data-bind="t.linkRutas"></span></a>
+    <a href="#/store"       class="list-group-item list-group-item-action"><strong>Store</strong> <span class="text-muted" data-bind="t.linkStore"></span></a>
+    <a href="#/servicios"   class="list-group-item list-group-item-action"><strong>Servicios / Services</strong> <span class="text-muted" data-bind="t.linkServicios"></span></a>
+    <a href="#/componentes" class="list-group-item list-group-item-action"><strong>Componentes</strong> <span class="text-muted" data-bind="t.linkComponentes"></span></a>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div>
+  <h4 class="mb-1" data-bind="t.title"></h4>
+  <p class="text-muted mb-4" data-bind="t.description"></p>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.demo"></div>
+        <div class="card-body">
+          <div class="d-flex gap-2 mb-3">
+            <button class="btn btn-primary btn-sm" data-click="load" data-bind="t.btnLoad"></button>
+            <button class="btn btn-outline-danger btn-sm" data-click="loadError" data-bind="t.btnError"></button>
+          </div>
+          <p class="small text-muted mb-2" data-bind="status"></p>
+          <ul class="list-group list-group-flush">
+            <template data-for="users">
+              <li class="list-group-item py-1 d-flex justify-content-between">
+                <strong data-bind="name"></strong>
+                <span class="text-muted small" data-bind="email"></span>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold" data-bind="t.code"></div>
+        <pre class="bg-dark text-light p-3 rounded-bottom mb-0" style="font-size:.8rem" data-bind="snippet"></pre>
+      </div>
+    </div>
+  </div>
+</div>

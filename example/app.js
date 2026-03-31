@@ -1,26 +1,30 @@
 import { initApp } from "../framework/app/init.js";
 
-const configRoot = document.getElementById("config");
-
 async function bootstrap() {
-  const app = await initApp({
+  await initApp({
     root: "#app",
     routes: {
-      home: "home",
-      about: "about",
-      external: "external",
-      clientes: "clientes"
+      home:         "home",
+      bindings:     "bindings",
+      listas:       "listas",
+      eventos:      "eventos",
+      rutas:        "rutas",
+      "perfil/:id": "perfil",
+      store:        "store",
+      servicios:    "servicios",
+      componentes:  "componentes"
     },
     config: "./config.yaml",
     store: {
-      user: null
-    }
+      lang:        localStorage.getItem("ols-lang") || "es",
+      user:        { name: "Dev User" },
+      visits:      0,
+      lastVisited: null
+    },
+    dev: true
   });
-
-  configRoot.textContent = JSON.stringify(app.getConfig(), null, 2);
 }
 
 bootstrap().catch((error) => {
-  const appRoot = document.getElementById("app");
-  appRoot.innerHTML = `<pre>${error.message}</pre>`;
+  document.getElementById("app").innerHTML = `<pre class="text-danger p-4">${error.message}</pre>`;
 });

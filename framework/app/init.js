@@ -90,6 +90,7 @@ export async function initApp(options = {}) {
       store,
       config,
       route: routeContext?.route || window.location.hash,
+      params: routeContext?.params || {},
       onStateChange: dev
         ? (change) => {
           log(`State updated: ${change.path} -> ${String(change.value)}`);
