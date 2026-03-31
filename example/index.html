@@ -7,10 +7,11 @@
     <link rel="icon" href="data:," />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
-      .app-shell { min-height: 100vh; }
-      .sidebar { width: 220px; min-width: 220px; min-height: 100vh; }
+      .app-shell { min-height: calc(100vh - 40px); }
+      .sidebar { width: 220px; min-width: 220px; min-height: calc(100vh - 40px); }
       .sidebar-link { font-size: 0.9rem; }
       .sidebar-link.active-link { background-color: rgba(255,255,255,0.12); color: #fff !important; border-radius: 4px; }
+      .site-footer { height: 40px; }
       @media (max-width: 991.98px) {
         .app-shell { display: block !important; }
         #app { padding: 1rem !important; }
@@ -145,6 +146,14 @@
         });
       })();
     </script>
+    <footer class="site-footer fixed-bottom bg-dark border-top border-secondary-subtle d-flex align-items-center justify-content-center gap-2">
+      <small class="text-secondary">OldSchoolFrontFrame</small>
+      <small class="text-secondary">·</small>
+      <a href="https://github.com/cynchro/OldSchoolFrontFrame" target="_blank" rel="noopener" class="text-secondary small">
+        github.com/cynchro/OldSchoolFrontFrame
+      </a>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./app.js"></script>
   </body>
