@@ -471,5 +471,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
-## Buy me a coffe?
+## Contact
+alexissaucedo@gmail.com
+
+## Buy me a coffee?
 https://www.paypal.com/donate/?hosted_button_id=YX332RT7KSJ4Q
