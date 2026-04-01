@@ -463,6 +463,10 @@ Be honest about fit. This is probably not ideal for:
 
 [MIT](LICENSE)
 
+## WIKI
+
+See https://cynchro.github.io/OldSchoolFrontFrame/example/
+
 ## Philosophy
 
 See [PHILOSOPHY.md](PHILOSOPHY.md).
