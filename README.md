@@ -463,6 +463,10 @@ Be honest about fit. This is probably not ideal for:
 
 [MIT](LICENSE)
 
+## Philosophy
+
+See [PHILOSOPHY.md](PHILOSOPHY.md).
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
