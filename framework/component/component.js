@@ -1,3 +1,8 @@
+/**
+ * OldSchoolFrontFrame (OLS)
+ * © 2025 Cynchro. All rights reserved.
+ */
+
 import { createReactiveState } from "../core/reactivity.js";
 import { bindData } from "../core/binder.js";
 import { attachEvents } from "../core/events.js";

@@ -1,3 +1,8 @@
+/**
+ * OldSchoolFrontFrame (OLS)
+ * © 2025 Cynchro. All rights reserved.
+ */
+
 const SUPPORTED_EVENTS = [
   "click",
   "change",

@@ -1,3 +1,8 @@
+/**
+ * OldSchoolFrontFrame (OLS)
+ * © 2025 Cynchro. All rights reserved.
+ */
+
 function isPlainObject(value) {
   return value != null && typeof value === "object" && !Array.isArray(value);
 }
