@@ -485,10 +485,9 @@ alexissaucedo@gmail.com
 ## Buy me a coffee?
 https://www.paypal.com/donate/?hosted_button_id=YX332RT7KSJ4Q
 
-<iframe src="https://ghbtns.com/github-btn.html?user=cynchro&repo=OldSchoolFrontFrame&type=star&count=true"
-  frameborder="0"
-  scrolling="0"
-  width="170"
-  height="30"
-  title="GitHub">
-</iframe>
+<p align="center">
+  <a href="https://github.com/cynchro/OldSchoolFrontFrame">
+    <img src="https://img.shields.io/badge/⭐%20Star%20on%20GitHub-black?style=for-the-badge" />
+  </a>
+</p>
+
