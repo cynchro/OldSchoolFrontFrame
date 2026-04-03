@@ -1,3 +1,8 @@
+/**
+ * OldSchoolFrontFrame (OLS)
+ * © 2025 Cynchro. All rights reserved.
+ */
+
 // WHY: separate static from dynamic routes at setup time so resolution stays O(1)
 // for the common case (static) and only scans dynamic patterns when needed.
 function buildRouteMatcher(routes) {

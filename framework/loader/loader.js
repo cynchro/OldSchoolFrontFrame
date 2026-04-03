@@ -1,3 +1,8 @@
+/**
+ * OldSchoolFrontFrame (OLS)
+ * © 2025 Cynchro. All rights reserved.
+ */
+
 import { Component } from "../component/component.js";
 
 function resolveMountPoint(mountPoint) {
