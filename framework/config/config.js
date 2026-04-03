@@ -1,3 +1,8 @@
+/**
+ * OldSchoolFrontFrame (OLS)
+ * © 2025 Cynchro. All rights reserved.
+ */
+
 function parseYaml(text) {
   const config = {};
   text.split("\n").forEach((line) => {

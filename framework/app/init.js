@@ -1,3 +1,8 @@
+/**
+ * OldSchoolFrontFrame (OLS)
+ * © 2025 Cynchro. All rights reserved.
+ */
+
 import { createRouter } from "../router/router.js";
 import { createStore } from "../store/store.js";
 import { loadConfig } from "../config/config.js";
@@ -47,7 +52,17 @@ async function resolveConfig(configOption) {
   return loadConfig(configOption);
 }
 
+function printBanner() {
+  console.log(
+    "%c OLS %c OldSchoolFrontFrame %c © 2025 Cynchro ",
+    "background:#1a1a2e;color:#e94560;padding:3px 8px;border-radius:3px 0 0 3px;font-weight:bold",
+    "background:#16213e;color:#a8d8ea;padding:3px 8px",
+    "background:#0f3460;color:#a8b2d8;padding:3px 8px;border-radius:0 3px 3px 0"
+  );
+}
+
 export async function initApp(options = {}) {
+  printBanner();
   const root = toElement(options.root || "#app");
   const routes = toHashRoutes(options.routes || {});
   const routeKeys = Object.keys(routes).filter((key) => key !== "*");

@@ -1,3 +1,8 @@
+/**
+ * OldSchoolFrontFrame (OLS)
+ * © 2025 Cynchro. All rights reserved.
+ */
+
 function readPath(source, path) {
   if (!path) return "";
   return path.split(".").reduce((acc, key) => {

@@ -1,3 +1,8 @@
+/**
+ * OldSchoolFrontFrame (OLS)
+ * © 2025 Cynchro. All rights reserved.
+ */
+
 export function createReactiveState(initialState = {}) {
   const listeners = new Set();
   const pathListeners = new Map();
