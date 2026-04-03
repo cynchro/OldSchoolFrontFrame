@@ -486,4 +486,5 @@ alexissaucedo@gmail.com
 https://www.paypal.com/donate/?hosted_button_id=YX332RT7KSJ4Q
 
 [![GitHub stars](https://img.shields.io/github/stars/cynchro/OldSchoolFrontFrame?style=social)](https://github.com/cynchro/OldSchoolFrontFrame)
+ 
 
