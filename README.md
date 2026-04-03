@@ -485,6 +485,8 @@ alexissaucedo@gmail.com
 ## Buy me a coffee?
 https://www.paypal.com/donate/?hosted_button_id=YX332RT7KSJ4Q
 
+⭐ If you like this project, give it a star!
+
 [![GitHub stars](https://img.shields.io/github/stars/cynchro/OldSchoolFrontFrame?style=social)](https://github.com/cynchro/OldSchoolFrontFrame)
  
 
