@@ -465,7 +465,15 @@ Be honest about fit. This is probably not ideal for:
 
 ## WIKI
 
-See https://cynchro.github.io/OldSchoolFrontFrame/example/
+See https://cynchro.github.io/OldSchoolFrontFrame/example
+
+## LANDING PAGE
+
+See https://cynchrolabs.com.ar/#/landings/oldschoolframe
+
+## DEMO
+
+See https://cynchrolabs.com.ar/#/landings/demo/login
 
 ## Philosophy
 

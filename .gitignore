@@ -20,6 +20,7 @@ npm-debug.log*
 # Optional local tooling
 node_modules/
 project/
+wiki/
 
 /README.SPANISH.md
 /AGENTS.md
