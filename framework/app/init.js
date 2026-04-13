@@ -82,11 +82,11 @@ export async function initApp(options = {}) {
   let currentModule = null;
   let currentModuleName = null;
 
-  window.$ols = {
-    store,
-    config,
-    currentModule: null
-  };
+  // WHY: only expose $ols in dev mode — in production the store and config should
+  // not be inspectable or patchable from the browser console.
+  if (dev) {
+    window.$ols = { store, config, currentModule: null };
+  }
 
   const log = (message) => {
     if (!dev) return;
@@ -113,7 +113,9 @@ export async function initApp(options = {}) {
         : undefined
     });
     currentModuleName = moduleName;
-    window.$ols.currentModule = currentModule;
+    if (dev) {
+      window.$ols.currentModule = currentModule;
+    }
   };
 
   const router = createRouter({
