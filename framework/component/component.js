@@ -66,6 +66,8 @@ function mountDefinition(definition, root, props = {}) {
     config: props.config
   };
   const methods = bindMethods(definition.methods || {}, reactive.state, context);
+  // WHY: attach methods to context so mounted/destroyed hooks can call them via ctx.methods.
+  context.methods = methods;
   const binder = bindData(root, reactive.state);
   const detachEvents = attachEvents(root, methods, context);
   const unsubscribe = reactive.subscribe((change) => {
@@ -76,7 +78,8 @@ function mountDefinition(definition, root, props = {}) {
     }
   });
 
-  binder.render();
+  // WHY: bindData already renders on setup; a second render here was redundant.
+  // State changes from mounted() trigger rerenders via the reactive subscription above.
   if (typeof definition.mounted === "function") {
     definition.mounted(context);
   }

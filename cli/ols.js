@@ -24,9 +24,11 @@ function parseArgs(argv) {
 function createModule(moduleName) {
   const modulesRoot = path.join(process.cwd(), "example", "modules");
   const moduleDir = path.join(modulesRoot, moduleName);
+  const servicesDir = path.join(moduleDir, "services");
   const htmlPath = path.join(moduleDir, `${moduleName}.html`);
   const jsPath = path.join(moduleDir, `${moduleName}.js`);
   const cssPath = path.join(moduleDir, `${moduleName}.css`);
+  const servicePath = path.join(servicesDir, `${moduleName}.service.js`);
 
   if (!fs.existsSync(modulesRoot)) {
     fail("Directory 'example/modules' was not found.");
@@ -37,6 +39,7 @@ function createModule(moduleName) {
   }
 
   fs.mkdirSync(moduleDir, { recursive: true });
+  fs.mkdirSync(servicesDir, { recursive: true });
 
   const title = moduleName.charAt(0).toUpperCase() + moduleName.slice(1);
   const htmlTemplate = `<div>
@@ -45,8 +48,7 @@ function createModule(moduleName) {
 </div>
 `;
   const jsTemplate = `import { defineModule } from "../../../framework/module.js";
-// Para lógica de API, creá: services/${moduleName}.service.js
-// import { getData } from "./services/${moduleName}.service.js";
+// import { getItems } from "./services/${moduleName}.service.js";
 
 export default defineModule({
   css: true,
@@ -60,6 +62,11 @@ export default defineModule({
     increment(_, ctx) {
       ctx.state.count++;
     }
+  },
+
+  async mounted(ctx) {
+    // const items = await getItems();
+    // ctx.state.items = items;
   }
 });
 `;
@@ -67,15 +74,28 @@ export default defineModule({
   font-size: 24px;
 }
 `;
+  const serviceTemplate = `// ${title} service — HTTP calls only, no DOM access.
+// Return data; let the module update state.
+
+const BASE = "";  // set via ctx.config.apiBase if needed
+
+export async function getItems() {
+  const res = await fetch(\`\${BASE}/${moduleName}\`);
+  if (!res.ok) throw new Error(\`\${res.status} \${res.statusText}\`);
+  return res.json();
+}
+`;
 
   fs.writeFileSync(htmlPath, htmlTemplate, "utf8");
   fs.writeFileSync(jsPath, jsTemplate, "utf8");
   fs.writeFileSync(cssPath, cssTemplate, "utf8");
+  fs.writeFileSync(servicePath, serviceTemplate, "utf8");
 
   console.log(`[OLS] Created module: ${moduleName}`);
   console.log(`[OLS] - ${htmlPath}`);
   console.log(`[OLS] - ${jsPath}`);
   console.log(`[OLS] - ${cssPath}`);
+  console.log(`[OLS] - ${servicePath}`);
 }
 
 function createStarter(targetFolder = "project") {
@@ -99,6 +119,7 @@ function createStarter(targetFolder = "project") {
   fs.mkdirSync(modulesRoot, { recursive: true });
   fs.mkdirSync(configRoot, { recursive: true });
   fs.mkdirSync(homeModuleDir, { recursive: true });
+  fs.mkdirSync(path.join(homeModuleDir, "services"), { recursive: true });
 
   const indexHtml = `<!doctype html>
 <html lang="en">
@@ -141,8 +162,7 @@ environment: local
 `;
 
   const homeJs = `import { defineModule } from "../../framework/module.js";
-// Para lógica de API, creá: services/home.service.js
-// import { getData } from "./services/home.service.js";
+// import { getItems } from "./services/home.service.js";
 
 export default defineModule({
   css: true,
@@ -154,8 +174,22 @@ export default defineModule({
     increment(_, ctx) {
       ctx.state.count += 1;
     }
+  },
+  async mounted(ctx) {
+    // const items = await getItems();
+    // ctx.state.items = items;
   }
 });
+`;
+
+  const homeServiceJs = `// Home service — HTTP calls only, no DOM access.
+// Return data; let the module update state.
+
+export async function getItems() {
+  const res = await fetch("/api/home");
+  if (!res.ok) throw new Error(\`\${res.status} \${res.statusText}\`);
+  return res.json();
+}
 `;
 
   const homeCss = `h1 {
@@ -169,6 +203,7 @@ export default defineModule({
   fs.writeFileSync(path.join(homeModuleDir, "home.html"), homeHtml, "utf8");
   fs.writeFileSync(path.join(homeModuleDir, "home.js"), homeJs, "utf8");
   fs.writeFileSync(path.join(homeModuleDir, "home.css"), homeCss, "utf8");
+  fs.writeFileSync(path.join(homeModuleDir, "services", "home.service.js"), homeServiceJs, "utf8");
 
   console.log(`[OLS] Starter created at: ${projectRoot}`);
   console.log("[OLS] Open index.html with a static server.");

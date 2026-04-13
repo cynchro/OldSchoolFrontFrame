@@ -6,6 +6,9 @@
 export function createReactiveState(initialState = {}) {
   const listeners = new Set();
   const pathListeners = new Map();
+  // WHY: WeakMap<target, Map<basePath, proxy>> — keying by (target, basePath) prevents
+  // returning a cached proxy with the wrong path when the same object appears at two
+  // different state paths (e.g. state.billing and state.shipping pointing to the same obj).
   const proxyCache = new WeakMap();
   let proxy = null;
 
@@ -22,14 +25,25 @@ export function createReactiveState(initialState = {}) {
     return basePath ? `${basePath}.${String(prop)}` : String(prop);
   };
 
+  const getCached = (target, basePath) => {
+    const byPath = proxyCache.get(target);
+    return byPath ? byPath.get(basePath) : undefined;
+  };
+
+  const setCached = (target, basePath, wrapped) => {
+    if (!proxyCache.has(target)) {
+      proxyCache.set(target, new Map());
+    }
+    proxyCache.get(target).set(basePath, wrapped);
+  };
+
   const makeReactive = (target, basePath = "") => {
     if (target === null || typeof target !== "object") {
       return target;
     }
 
-    if (proxyCache.has(target)) {
-      return proxyCache.get(target);
-    }
+    const cached = getCached(target, basePath);
+    if (cached) return cached;
 
     const wrapped = new Proxy(target, {
       get(obj, prop) {
@@ -72,7 +86,7 @@ export function createReactiveState(initialState = {}) {
       }
     });
 
-    proxyCache.set(target, wrapped);
+    setCached(target, basePath, wrapped);
     return wrapped;
   };
 

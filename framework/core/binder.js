@@ -84,14 +84,16 @@ function renderForPath(path, forNodes, state) {
 }
 
 export function bindData(root, state, options = {}) {
-  const selectors = options.selector || "[data-bind]";
-  const nodes = root.matches(selectors)
-    ? [root, ...Array.from(root.querySelectorAll(selectors))]
-    : Array.from(root.querySelectorAll(selectors));
+  // WHY: include [data-model] elements even when they lack [data-bind], so that a plain
+  // <input data-model="field"> both displays the current value and writes back on input.
+  const bindSelector = "[data-bind], [data-model]";
+  const nodes = Array.from(root.querySelectorAll(bindSelector));
+  if (root.matches(bindSelector)) nodes.unshift(root);
   const nodeGroupsByPath = new Map();
 
   nodes.forEach((node) => {
-    const path = node.dataset.bind;
+    // For elements with only data-model, use the model path for display as well.
+    const path = node.dataset.bind || node.dataset.model;
     if (!path) return;
     if (!nodeGroupsByPath.has(path)) {
       nodeGroupsByPath.set(path, []);
@@ -133,9 +135,9 @@ export function bindData(root, state, options = {}) {
 
   const attachTwoWay = () => {
     nodes.forEach((node) => {
-      if (!node.matches("[data-model]")) return;
+      if (!node.dataset.model) return;
 
-      const modelPath = node.dataset.model || node.dataset.bind;
+      const modelPath = node.dataset.model;
       const eventName = node.dataset.modelEvent || "input";
 
       node.addEventListener(eventName, () => {

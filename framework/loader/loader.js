@@ -52,22 +52,29 @@ export function scopeCss(cssText, moduleName) {
   const scopePrefix = `[data-module="${moduleName}"]`;
 
   // WHY: keep CSS scoping readable and deterministic over full CSS-spec coverage.
-  return cssText.replace(/(^|})\s*([^@{}][^{}]*)\s*\{/g, (match, blockStart, rawSelectors) => {
-    const selectors = rawSelectors
-      .split(",")
-      .map((selector) => selector.trim())
-      .filter(Boolean);
+  // Limitation: only one level of nesting is handled — sufficient for module styles.
+  // @keyframes and unknown @-rules are left untouched.
+  function scopeSelectors(block) {
+    return block.replace(/(^|})\s*([^@{}][^{}]*?)\s*\{/g, (match, blockStart, rawSelectors) => {
+      const selectors = rawSelectors
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
+      if (!selectors.length) return match;
+      const scoped = selectors.map((s) => `${scopePrefix} ${s}`).join(", ");
+      return `${blockStart} ${scoped} {`;
+    });
+  }
 
-    if (selectors.length === 0) {
-      return match;
-    }
+  // WHY: @media/@supports blocks need their inner selectors scoped too. Process them
+  // first so the top-level pass doesn't see already-scoped text as double-scope candidates.
+  // Pattern matches one level deep: @rule { selector { props } selector { props } }
+  const withAtRules = cssText.replace(
+    /(@(?:media|supports)\b[^{]*)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,
+    (match, atRule, inner) => `${atRule}{\n${scopeSelectors(inner)}\n}`
+  );
 
-    const scopedSelectors = selectors
-      .map((selector) => `${scopePrefix} ${selector}`)
-      .join(", ");
-
-    return `${blockStart} ${scopedSelectors} {`;
-  });
+  return scopeSelectors(withAtRules);
 }
 
 async function importDefinition(jsPath) {
@@ -86,17 +93,12 @@ export async function loadModule(name, mountPoint, props = {}) {
   const cssPath = new URL(`${name}.css`, moduleBaseUrl).href;
   const jsPath = new URL(`${name}.js`, moduleBaseUrl).href;
 
-  const html = await fetchText(htmlPath);
-  const wrappedHtml = wrapModuleHtml(name, html);
-  root.innerHTML = wrappedHtml;
-  const moduleRoot = root.querySelector(`[data-module="${name}"]`);
-  if (!(moduleRoot instanceof Element)) {
-    throw new Error(`Failed to mount module root for "${name}".`);
-  }
-
-  const definition = await importDefinition(jsPath);
-  const component = Component(definition);
-  const instance = component.mount(moduleRoot, props);
+  // WHY: fetch HTML and JS in parallel to reduce load time, then apply CSS before
+  // injecting HTML into the DOM to prevent a Flash of Unstyled Content (FOUC).
+  const [html, definition] = await Promise.all([
+    fetchText(htmlPath),
+    importDefinition(jsPath)
+  ]);
 
   if (definition.css === true) {
     const css = await tryFetchText(cssPath);
@@ -105,5 +107,13 @@ export async function loadModule(name, mountPoint, props = {}) {
     }
   }
 
-  return instance;
+  const wrappedHtml = wrapModuleHtml(name, html);
+  root.innerHTML = wrappedHtml;
+  const moduleRoot = root.querySelector(`[data-module="${name}"]`);
+  if (!(moduleRoot instanceof Element)) {
+    throw new Error(`Failed to mount module root for "${name}".`);
+  }
+
+  const component = Component(definition);
+  return component.mount(moduleRoot, props);
 }
